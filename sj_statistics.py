@@ -23,6 +23,12 @@ def get_superjob_statistics(professions, town_id, catalogues):
         }
         
         response = requests.get(url, params=params, headers=headers)
+        try:
+            response.raise_for_status()
+        except requests.exceptions.HTTPError as e:
+            print(f"Ошибка при запросе Sj: {e}")
+            return None
+        
         all_items = response.json().get('objects', [])
         
         vacancies_found = len(all_items)

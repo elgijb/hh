@@ -25,6 +25,12 @@ def get_headhunter_statistics(professions, town_id, catalogues):
         for page in range(total_pages):
             params['page'] = page
             response = requests.get(url, params=params)
+            try:
+                response.raise_for_status()
+            except requests.exceptions.HTTPError as e:
+                print(f"Ошибка при запросе к HH на странице {page + 1}: {e}")
+                continue
+            
             page_data = response.json()
             all_items.extend(page_data.get('items', []))
         
