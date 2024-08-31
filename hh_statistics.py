@@ -3,8 +3,8 @@ import requests
 def get_headhunter_statistics(professions, town_id, catalogues):
     statistics = {}
     for profession in professions:
-        salary_from_list = []
-        salary_to_list = []
+        salary_from = []
+        salary_to = []
         vacancies_found = 0
         vacancies_processed = 0
         
@@ -36,13 +36,13 @@ def get_headhunter_statistics(professions, town_id, catalogues):
                 salary_from = salary.get('from')
                 salary_to = salary.get('to')
                 if salary_from is not None:
-                    salary_from_list.append(salary_from)
+                    salary_from.append(salary_from)
                 if salary_to is not None:
-                    salary_to_list.append(salary_to)
+                    salary_to.append(salary_to)
         
         average_salary = None
-        if salary_from_list or salary_to_list:
-            combined_salaries = salary_from_list + salary_to_list
+        if salary_from or salary_to:
+            combined_salaries = salary_from + salary_to
             average_salary = sum(combined_salaries) / len(combined_salaries)
         
         statistics[profession] = {
