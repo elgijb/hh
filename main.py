@@ -9,7 +9,7 @@ def main():
     
     hh_statistics = get_headhunter_statistics(professions, town_id, catalogues)
     
-    sj_statistics = get_superjob_statistics(professions, town_id, catalogues)
+    sj_statistics = get_superjob_statistics(professions, catalogues)
     
     print_statistics_table('HeadHunter Moscow', hh_statistics)
     print_statistics_table('SuperJob Moscow', sj_statistics)
