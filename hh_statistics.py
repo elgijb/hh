@@ -5,8 +5,8 @@ from itertools import count
 def get_headhunter_statistics(professions, town_id, catalogs, page=0):
     statistics = {}
     for profession in professions:
-        salarys_from = []
-        salarys_to = []
+        salaries_from = []
+        salaries_to = []
         vacancies_found = 0
         vacancies_processed = 0
         
@@ -28,20 +28,20 @@ def get_headhunter_statistics(professions, town_id, catalogs, page=0):
                 break
             vacancies_found = received_vacancies.get('found', 0)
 
-            for vacancyes in received_vacancies['items']:
-                salary = vacancyes.get('salary')
+            for vacancies in received_vacancies['items']:
+                salary = vacancies.get('salary')
                 if salary and salary['currency'] == 'RUR':
                     salary_from = salary.get('from')
                     salary_to = salary.get('to')
                     if salary_from is not None:
-                        salarys_from.append(salary_from)
+                        salaries_from.append(salary_from)
                     if salary_to is not None:
-                        salarys_to.append(salary_to)
+                        salaries_to.append(salary_to)
                     vacancies_processed += 1
         
         average_salary = None
-        if salarys_from or salarys_to:
-            combined_salaries = salarys_from + salarys_to
+        if salaries_from or salaries_to:
+            combined_salaries = salaries_from + salaries_to
             if len(combined_salaries) > 0:
                 average_salary = sum(combined_salaries) / len(combined_salaries)
         
