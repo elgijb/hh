@@ -1,12 +1,11 @@
-# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
+
 *.so
 
-# Distribution / packaging
+
 .Python
 build/
 develop-eggs/
@@ -27,7 +26,7 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# Unit test / coverage reports
+
 htmlcov/
 .tox/
 .nox/
@@ -42,7 +41,7 @@ coverage.xml
 .pytest_cache/
 cover/
 
-# Environments
+
 .env
 .venv
 env/
@@ -51,18 +50,18 @@ ENV/
 env.bak/
 venv.bak/
 
-# IDE settings
+
 .vscode/
 .idea/
 
-# macOS files
+
 .DS_Store
 
-# Windows files
+
 Thumbs.db
 Desktop.ini
 
-# Logs and temporary files
+
 *.log
 *.tmp
 *.temp
