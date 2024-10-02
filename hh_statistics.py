@@ -2,7 +2,7 @@ import requests
 from itertools import count
 
 
-def get_headhunter_statistics(professions, town_id, catalogues, page=0):
+def get_headhunter_statistics(professions, town_id, catalogs, page=0):
     statistics = {}
     for profession in professions:
         salarys_from = []
@@ -16,7 +16,7 @@ def get_headhunter_statistics(professions, town_id, catalogues, page=0):
             params = {
                 'text': profession,
                 'area': town_id,
-                'catalogues': catalogues,
+                'catalogs': catalogs,
                 'per_page': 100,
                 'page': page 
             }

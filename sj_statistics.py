@@ -3,7 +3,7 @@ import requests
 from dotenv import load_dotenv
 from itertools import count
 
-def get_superjob_statistics(professions, catalogues):
+def get_superjob_statistics(professions):
     statistics = {}
     load_dotenv()
     SJ_SECRET_KEY = os.getenv('SECRET_KEY')
@@ -22,8 +22,7 @@ def get_superjob_statistics(professions, catalogues):
         
         params = {
             'town': "Moscow",
-            'keyword': profession,
-
+            'keyword': profession
         }
 
         for page in count(0):
