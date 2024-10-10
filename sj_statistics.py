@@ -1,16 +1,11 @@
-import os
 import requests
-from dotenv import load_dotenv
 from itertools import count
 
-def get_superjob_statistics(professions):
+def get_superjob_statistics(professions, secret_key):
     statistics = {}
-    load_dotenv()
-    SJ_SECRET_KEY = os.getenv('SECRET_KEY')
-
     url = 'https://api.superjob.ru/2.0/vacancies/'
     headers = {
-        'X-Api-App-Id': SJ_SECRET_KEY
+        'X-Api-App-Id': secret_key
     }
 
     for profession in professions:
