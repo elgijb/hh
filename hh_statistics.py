@@ -4,11 +4,10 @@ from itertools import count
 def get_headhunter_statistics(professions, town_id, catalogs):
     statistics = {}
     for profession in professions:
-        salaries_from = []
-        salaries_to = []
+        salaries = []
         vacancies_found = 0
         vacancies_processed = 0
-        
+
         for page in count(0):
             url = 'https://api.hh.ru/vacancies'
             params = {
@@ -18,16 +17,12 @@ def get_headhunter_statistics(professions, town_id, catalogs):
                 'per_page': 100,
                 'page': page
             }
-            
+
             try:
                 response = requests.get(url, params=params)
                 response.raise_for_status()
-                
-                if 'error' in response.json():
-                    raise requests.exceptions.HTTPError(response.json()['error'])
 
                 received_vacancies = response.json()
-
                 if page >= received_vacancies['pages'] - 1:
                     break
 
@@ -38,11 +33,21 @@ def get_headhunter_statistics(professions, town_id, catalogs):
                     if salary and salary['currency'] == 'RUR':
                         salary_from = salary.get('from')
                         salary_to = salary.get('to')
-                        if salary_from is not None:
-                            salaries_from.append(salary_from)
-                        if salary_to is not None:
-                            salaries_to.append(salary_to)
+
+                        if salary_from is not None and salary_to is not None:
+                            expected_salary = (salary_from + salary_to) / 2
+                        elif salary_from is not None:
+                            expected_salary = salary_from * 1.2
+                        elif salary_to is not None:
+                            expected_salary = salary_to * 0.8
+                        else:
+                            expected_salary = None
+
+                        if expected_salary:
+                            salaries.append(expected_salary)
+
                         vacancies_processed += 1
+
             except requests.exceptions.HTTPError as http_err:
                 print(f"HTTP error occurred: {http_err}")
                 return None
@@ -50,11 +55,7 @@ def get_headhunter_statistics(professions, town_id, catalogs):
                 print(f"An error occurred: {err}")
                 return None
 
-        if salaries_from or salaries_to:
-            combined_salaries = salaries_from + salaries_to
-            average_salary = sum(combined_salaries) / len(combined_salaries) if combined_salaries else None
-        else:
-            average_salary = None
+        average_salary = sum(salaries) / len(salaries) if salaries else None
 
         statistics[profession] = {
             'vacancies_found': vacancies_found,
