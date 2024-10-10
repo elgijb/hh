@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 def main():
     load_dotenv()
-    sj_secret_key = os.getenv('SECRET_KEY')
+    sj_secret_key = os.getenv('SJ_SECRET_KEY')
     
     professions = ["python", "c", "c#", "c++", "java", "js", "ruby", "go", "1с"]
     town_id = '1'
