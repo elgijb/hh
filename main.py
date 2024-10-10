@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 def main():
     load_dotenv()
-    SJ_SECRET_KEY = os.getenv('SECRET_KEY')
+    sj_secret_key = os.getenv('SECRET_KEY')
     
     professions = ["python", "c", "c#", "c++", "java", "js", "ruby", "go", "1с"]
     town_id = '1'
@@ -14,7 +14,7 @@ def main():
     
     hh_statistics = get_headhunter_statistics(professions, town_id, catalogs)
     
-    sj_statistics = get_superjob_statistics(professions, SJ_SECRET_KEY)
+    sj_statistics = get_superjob_statistics(professions, sj_secret_key)
     
     print_statistics_table('HeadHunter Moscow', hh_statistics)
     print_statistics_table('SuperJob Moscow', sj_statistics)

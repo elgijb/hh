@@ -3,7 +3,7 @@ from itertools import count
 
 def get_superjob_statistics(professions, secret_key):
     statistics = {}
-    url = 'https://api.superjob.ru/2.0/vacancies/'
+    URL = 'https://api.superjob.ru/2.0/vacancies/'
     headers = {
         'X-Api-App-Id': secret_key
     }
@@ -22,7 +22,7 @@ def get_superjob_statistics(professions, secret_key):
             params['page'] = page
 
             try:
-                response = requests.get(url, params=params, headers=headers)
+                response = requests.get(URL, params=params, headers=headers)
                 response.raise_for_status()
 
                 received_vacancies = response.json()
